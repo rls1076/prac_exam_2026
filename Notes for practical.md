@@ -1,4 +1,3 @@
-
 ### Notes for Practical #1
 
 **Forking and Cloning a Repository**
@@ -13,6 +12,18 @@
 1. cd $HOME
 2. cd ~
 3. cd ../../../
+
+**Absolute Path to working directory**
+
+```
+cd /home/users/rls1076/DIRECTORYNAME/
+```
+
+**Make a directory within another directory in a single command**
+
+```
+mkdir -p firstdir/secondir
+```
 
 **How to list files in /bin starting with certain letters**
 
@@ -86,29 +97,33 @@ chmod (permission) FILE.fastq
 **How to find size of fastq file**
 
 ```
-ls -l -h
+ls -l -h [include name of file if specific]
 ```
 
 **Load a conda environment and find where a program called 'fastqc' is stored**
-1. activate genomics (this loads conda called genomics)
+1. conda activate genomics (this loads conda called genomics)
 
 ```
-fastqc *.fastq
+fastqc *.fastq*
 ```
 
 **Unzip a zipped file**
 
 ```
-*zip
+*zip filename.zip
+
+*gunzip filenmae.gz
 ```
 
 **Searcing within a file using combined commands**
+
+* command below searches files ending in fastq with the header line @SRR, -A1 displays one line after each match, -h suppresses names
 
 ```
 grep -A1 -h '@SRR' *fastq
 ```
 
-* above command searches files ending in fastq with the header line @SRR, -A1 displays one line after each match, -h suppresses names
+* pipeline below filters out lines that start with '---' and '@SRR'
 
 ```
 grep -A1 -h '@SRR' *fastq | grep -v '^--' | grep -v '^@SRR'
@@ -121,7 +136,7 @@ grep -A1 -h '@SRR' *fastq | grep -v '^--' | grep -v '^@SRR'
 grep -B1 "GNATNAC" NAME.fastq (for a single specific file)
 ```
 
-*use command below to search all fastq files
+* use command below to search all fastq files
 
 ```
 grep -B "GNATNAC" *.fastq (to search all fastq files)
@@ -145,6 +160,13 @@ wc -l NAME.fastq
 
 ```
 grep NNN NAME.fastq | wc -l
+```
+
+**Using the reads found in a bad sequence search of fastqs, make a single fasta file called badreads.fasta**
+
+```
+grep -B1 NNNNNNNNNNNNNNN *fastq > badreads.fasta
+
 ```
 
 **Remove _2026 from all .txt files**
@@ -223,7 +245,11 @@ grep 'plus' Ecoli_metadata_composite.csv | wc -l
 cut -f6 -d',' Ecoli_metadata_composite.csv | sort | uniq -c
 
 ```
+**Commnds to get practical exxam pasted into vscode**
 
+```
+
+```
 **From the home directory, make a new directory called 'name'**
 
 ```
@@ -242,12 +268,12 @@ mc *COPY.fastq name/
 Directly copy into directory
 
 ```
-cp [absolute path to source files]Sample1.fastq name/
+cp [absolute path to source files]Sample1.fastq [absolut path to directory]name/
 ```
 
-**Absolute path to change current working directory to 'name' folder/directory***
+**Absolute path to change current working directory to 'name' folder/directory**
 
-* Fill in '...' with directory path
+* Fill in '...' with absolute path
 ```
 cd /home/username/..../name
 ```
@@ -258,7 +284,7 @@ cd /home/username/..../name
 3. Redirect output in new files with a different extensions
 
 ```
-grep -A 1 --no-group-separator  "@SRR09" filename.fastq > newfile.fasta
+grep -A 1 --no-group-separator  "@SRR09" filename.fastq > newfile.fasta
 ```
 
 **Command to search how many reads have 15 or more uncalled bases in multiple samples and count the number of reads without making a new file**
@@ -270,7 +296,7 @@ grep 'NNNNN' *.fastq | wc -l
 **Command to make a new directory called 'name' in current directory, then move fasta files in**
 
 ```
-mkdir name
+mkdir [absolute path]name
 
 mv Sample1.fasta Sample2.fasta name/
 ```
@@ -297,7 +323,7 @@ head -n 100 Sample1.fasta | tail -n 1
 **Run (command) on Sample1.fasta, run again and redirect output to a new file**
 
 ```
-md5sum Sample1.fasta > my_md5sums.txt
+(md5sum) Sample1.fasta > my_md5sums.txt
 ```
 
 **Add a line of text to the end of an existing text file**
